@@ -15,12 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Monom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Operations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Polinom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="postfix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Polynom.cpp">
+    <ClCompile Include="Monom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Polinom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

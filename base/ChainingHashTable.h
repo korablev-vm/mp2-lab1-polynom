@@ -1,4 +1,4 @@
-#ifndef CHAININGHASHTABLE_H
+п»ї#ifndef CHAININGHASHTABLE_H
 #define CHAININGHASHTABLE_H
 
 #include "List.h"
@@ -8,9 +8,9 @@ using namespace std;
 
 template <typename T>
 class ChainingHashTable {
-    vector<TSinglyList<T>> table; // Вектор списков для хранения элементов
-    int capacity; // Вместимость таблицы
-    int hashFunction(const T& element) const; // Хеш-функция
+    vector<TSinglyList<T>> table; // Р’РµРєС‚РѕСЂ СЃРїРёСЃРєРѕРІ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ
+    int capacity; // Р’РјРµСЃС‚РёРјРѕСЃС‚СЊ С‚Р°Р±Р»РёС†С‹
+    int hashFunction(const T& element) const; // РҐРµС€-С„СѓРЅРєС†РёСЏ
 public:
     ChainingHashTable(int size);
     ~ChainingHashTable();

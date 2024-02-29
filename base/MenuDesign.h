@@ -1,4 +1,4 @@
-#ifndef MENUDESIGN_H
+ï»¿#ifndef MENUDESIGN_H
 #define MENUDESIGN_H
 
 #include <conio.h>
@@ -112,8 +112,8 @@ void hidecursor(void)
 void exit_prog()
 {
 	system("cls");
-	cout << "Ñïàñèáî çà èñïîëüçîâàíèå ïðîãðàììû!" << endl;
-	cout << "Äî ñâèäàíèÿ" << endl;
+	cout << "Ð¡Ð¿Ð°ÑÐ¸Ð±Ð¾ Ð·Ð° Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹!" << endl;
+	cout << "Ð”Ð¾ ÑÐ²Ð¸Ð´Ð°Ð½Ð¸Ñ" << endl;
 	system("pause");
 	exit(0);
 }

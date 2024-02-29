@@ -1,4 +1,4 @@
-#ifndef OPENADDRESSINGHASHTABLE_H
+п»ї#ifndef OPENADDRESSINGHASHTABLE_H
 #define OPENADDRESSINGHASHTABLE_H
 
 #include <vector>
@@ -6,9 +6,9 @@ using namespace std;
 
 template <typename T>
 class OpenAddressingHashTable {
-    vector<T> table; // Вектор для хранения элементов
-    int capacity; // Вместимость таблицы
-    int hashFunction(const T& element) const; // Хеш-функция
+    vector<T> table; // Р’РµРєС‚РѕСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ
+    int capacity; // Р’РјРµСЃС‚РёРјРѕСЃС‚СЊ С‚Р°Р±Р»РёС†С‹
+    int hashFunction(const T& element) const; // РҐРµС€-С„СѓРЅРєС†РёСЏ
 public:
     OpenAddressingHashTable(int size);
     ~OpenAddressingHashTable();

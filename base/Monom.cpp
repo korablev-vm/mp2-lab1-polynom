@@ -1,4 +1,4 @@
-#include "Monom.h"
+﻿#include "Monom.h"
 
 Monom::Monom(double _key, double _coeff, map<string, int> _variables) : key(_key), coefficient(_coeff), variables(_variables) {}
 

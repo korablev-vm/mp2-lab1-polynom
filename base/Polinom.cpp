@@ -1,4 +1,4 @@
-#include "Polinom.h"
+﻿#include "Polinom.h"
 
 map<string, int> all_variables;
 

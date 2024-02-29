@@ -1,4 +1,4 @@
-#ifndef MONOM_H
+﻿#ifndef MONOM_H
 #define MONOM_H
 
 #include <vector>

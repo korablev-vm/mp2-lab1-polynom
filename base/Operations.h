@@ -1,4 +1,4 @@
-#ifndef OPERATIONS_H
+п»ї#ifndef OPERATIONS_H
 #define OPERATIONS_H
 
 #include <map>
@@ -61,7 +61,7 @@ public:
             if (second == 0) throw runtime_error("Division by zero.");
             return (first / second);
         }
-        // Добавить исключение или возвращаемое значение по умолчанию для неподдерживаемых операций
+        // Р”РѕР±Р°РІРёС‚СЊ РёСЃРєР»СЋС‡РµРЅРёРµ РёР»Рё РІРѕР·РІСЂР°С‰Р°РµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ РЅРµРїРѕРґРґРµСЂР¶РёРІР°РµРјС‹С… РѕРїРµСЂР°С†РёР№
         throw invalid_argument("Unsupported operation: " + op);
     };
 };

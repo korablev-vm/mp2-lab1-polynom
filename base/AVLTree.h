@@ -1,4 +1,4 @@
-#ifndef AVLTREE_H
+п»ї#ifndef AVLTREE_H
 #define AVLTREE_H
 
 #include <iostream>
@@ -8,22 +8,22 @@ class AVLTree {
     class Node {
     public:
         T data;
-        Node* left; // Левый потомок
-        Node* right; // Правый потомок
-        int height; // Высота узла
+        Node* left; // Р›РµРІС‹Р№ РїРѕС‚РѕРјРѕРє
+        Node* right; // РџСЂР°РІС‹Р№ РїРѕС‚РѕРјРѕРє
+        int height; // Р’С‹СЃРѕС‚Р° СѓР·Р»Р°
 
         Node(T data, Node* left = nullptr, Node* right = nullptr, int height = 1);
     };
 
-    Node* root; // Корень дерева
+    Node* root; // РљРѕСЂРµРЅСЊ РґРµСЂРµРІР°
 
-    Node* rotateRight(Node* y); // Правый поворот
-    Node* rotateLeft(Node* x); // Левый поворот
-    int getHeight(Node* N); // Получение высоты узла
-    int getBalance(Node* N); // Получение баланса узла
-    Node* insert(Node* node, const T& key); // Вставка узла
-    Node* minValueNode(Node* node); // Поиск узла с минимальным значением
-    Node* deleteNode(Node* root, const T& key); // Удаление узла
+    Node* rotateRight(Node* y); // РџСЂР°РІС‹Р№ РїРѕРІРѕСЂРѕС‚
+    Node* rotateLeft(Node* x); // Р›РµРІС‹Р№ РїРѕРІРѕСЂРѕС‚
+    int getHeight(Node* N); // РџРѕР»СѓС‡РµРЅРёРµ РІС‹СЃРѕС‚С‹ СѓР·Р»Р°
+    int getBalance(Node* N); // РџРѕР»СѓС‡РµРЅРёРµ Р±Р°Р»Р°РЅСЃР° СѓР·Р»Р°
+    Node* insert(Node* node, const T& key); // Р’СЃС‚Р°РІРєР° СѓР·Р»Р°
+    Node* minValueNode(Node* node); // РџРѕРёСЃРє СѓР·Р»Р° СЃ РјРёРЅРёРјР°Р»СЊРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј
+    Node* deleteNode(Node* root, const T& key); // РЈРґР°Р»РµРЅРёРµ СѓР·Р»Р°
 public:
     AVLTree();
     ~AVLTree();

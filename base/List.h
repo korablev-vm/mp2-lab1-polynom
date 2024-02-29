@@ -1,4 +1,4 @@
-#ifndef TSINGLYLIST_H
+﻿#ifndef TSINGLYLIST_H
 #define TSINGLYLIST_H
 
 #include <cmath>

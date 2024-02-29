@@ -1,21 +1,21 @@
-#ifndef LINKEDLISTTABLE_H
+п»ї#ifndef LINKEDLISTTABLE_H
 #define LINKEDLISTTABLE_H
 
 #include <iostream>
 
 template <typename T>
 class LinkedListTable {
-    Node<T>* head; // Голова списка
-    int size; // Размер списка
+    Node<T>* head; // Р“РѕР»РѕРІР° СЃРїРёСЃРєР°
+    int size; // Р Р°Р·РјРµСЂ СЃРїРёСЃРєР°
 public:
     LinkedListTable();
     ~LinkedListTable();
 
-    void add(const T& element); // Добавление полинома
-    void remove(const T& element); // Удаление полинома
-    T* find(const T& element) const; // Поиск полинома
-    void display() const; // Отображение таблицы
-    int getSize() const; // Получение размера таблицы
+    void add(const T& element); // Р”РѕР±Р°РІР»РµРЅРёРµ РїРѕР»РёРЅРѕРјР°
+    void remove(const T& element); // РЈРґР°Р»РµРЅРёРµ РїРѕР»РёРЅРѕРјР°
+    T* find(const T& element) const; // РџРѕРёСЃРє РїРѕР»РёРЅРѕРјР°
+    void display() const; // РћС‚РѕР±СЂР°Р¶РµРЅРёРµ С‚Р°Р±Р»РёС†С‹
+    int getSize() const; // РџРѕР»СѓС‡РµРЅРёРµ СЂР°Р·РјРµСЂР° С‚Р°Р±Р»РёС†С‹
 
 };
 

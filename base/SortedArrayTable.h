@@ -1,13 +1,13 @@
-#ifndef SORTEDARRAYTABLE_H
+п»ї#ifndef SORTEDARRAYTABLE_H
 #define SORTEDARRAYTABLE_H
 
 #include <iostream>
 
 template <typename T>
 class SortedArrayTable {
-    T* array; // Массив для хранения полиномов
-    int capacity; // Вместимость таблицы
-    int currentSize; // Текущий размер таблицы
+    T* array; // РњР°СЃСЃРёРІ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РїРѕР»РёРЅРѕРјРѕРІ
+    int capacity; // Р’РјРµСЃС‚РёРјРѕСЃС‚СЊ С‚Р°Р±Р»РёС†С‹
+    int currentSize; // РўРµРєСѓС‰РёР№ СЂР°Р·РјРµСЂ С‚Р°Р±Р»РёС†С‹
     void resize();
     int binarySearch(const T& element) const;
 public:
@@ -16,8 +16,8 @@ public:
 
     void add(const T& element);
     void remove(const T& element);
-    T& get(int index) const; // Получение полинома по индексу
-    int find(const T& element) const; // Поиск индекса полинома
+    T& get(int index) const; // РџРѕР»СѓС‡РµРЅРёРµ РїРѕР»РёРЅРѕРјР° РїРѕ РёРЅРґРµРєСЃСѓ
+    int find(const T& element) const; // РџРѕРёСЃРє РёРЅРґРµРєСЃР° РїРѕР»РёРЅРѕРјР°
     void display() const;
     int getSize() const;
 

@@ -3,6 +3,12 @@
 *.lo
 *.o
 *.obj
+*.vsidx
+*.suo
+*.db-*
+*.opendb
+*.ipch
+*.db
 
 # Precompiled Headers
 *.gch
@@ -28,3 +34,71 @@
 *.out
 *.app
 /Студенты/
+/.vs/
+/Debug/
+/x64/
+/v17/
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+
+# Visual Studio specific files
+.vs/
+.vscode/
+*.sdf
+*.suo
+*.pdb
+*.idb
+*.ipch
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.cachefile
+*.VC.db
+*.VC.opendb
+*.sln.VC.db   # Добавлено для исключения файлов с расширением .sln.VC.db
+
+# CMake specific files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+CTestTestfile.cmake
+CTestTestfile.cmake.tmp
+cmake_install.cmake
+CMakeDoxyfile.in
+install_manifest.txt
+
+# OS generated files
+.DS_Store
+Thumbs.db
+

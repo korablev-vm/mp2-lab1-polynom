@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TSINGLYLIST_H
+#define TSINGLYLIST_H
+
 #include <cmath>
 #include <map>
 #include<string>
@@ -252,3 +254,5 @@ List<T>::~List()
 		delete pDel;
 	}
 }
+
+#endif // TSINGLYLIST_H

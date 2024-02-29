@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MONOM_H
+#define MONOM_H
+
 #include <vector>
 #include <string>
 #include <map>
@@ -29,3 +31,5 @@ public:
 
 Monom operator*(const Monom& m1, const Monom& m2);
 Monom operator+(const Monom& m1, const Monom& m2);
+
+#endif // !MONOM_H

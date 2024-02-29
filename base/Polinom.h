@@ -1,4 +1,6 @@
-#pragma once
+#ifndef POLINOM_H
+#define POLINOM_H
+
 #include "List.h"
 #include "Monom.h"
 #include <map>
@@ -32,3 +34,5 @@ private:
 
 Polinom operator+(Polinom& first, Polinom& second);
 Polinom operator*(Polinom& first, Polinom& second);
+
+#endif // !POLINOM_H

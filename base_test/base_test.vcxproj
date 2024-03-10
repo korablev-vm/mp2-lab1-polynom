@@ -83,7 +83,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="test_list.cpp" />
     <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="test_polynom.cpp" />
+    <ClCompile Include="test_postfix.cpp" />
+    <ClCompile Include="test_stack.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

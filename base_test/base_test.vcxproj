@@ -83,10 +83,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="test_AVLTree.cpp" />
+    <ClCompile Include="test_chainingHashTable.cpp" />
+    <ClCompile Include="test_linearArrayTable.cpp" />
+    <ClCompile Include="test_linkedListTable.cpp" />
     <ClCompile Include="test_list.cpp" />
     <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="test_monom.cpp" />
+    <ClCompile Include="test_openAddressingHashTable.cpp" />
     <ClCompile Include="test_polynom.cpp" />
     <ClCompile Include="test_postfix.cpp" />
+    <ClCompile Include="test_sortedArrayTable.cpp" />
     <ClCompile Include="test_stack.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

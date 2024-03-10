@@ -36,27 +36,27 @@ TEST(Polinom, can_assign_one_polinom_to_another)
 	ADD_FAILURE();
 }
 
-TEST(List, can_add_one_polinom_to_another)
+TEST(Polinom, can_add_one_polinom_to_another)
 {
 	ADD_FAILURE();
 }
 
-TEST(List, can_multiply_one_polinom_to_another)
+TEST(Polinom, can_multiply_one_polinom_to_another)
 {
 	ADD_FAILURE();
 }
 
-TEST(List, can_integrate_polinom)
+TEST(Polinom, can_integrate_polinom)
 {
 	ADD_FAILURE();
 }
 
-TEST(List, can_differentiate_polinom)
+TEST(Polinom, can_differentiate_polinom)
 {
 	ADD_FAILURE();
 }
 
-TEST(List, can_calulate_polinom)
+TEST(Polinom, can_calulate_polinom)
 {
 	ADD_FAILURE();
 }

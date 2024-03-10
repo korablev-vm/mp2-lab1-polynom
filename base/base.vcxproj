@@ -22,6 +22,7 @@
     <ClInclude Include="Polinom.h" />
     <ClInclude Include="SortedArrayTable.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="TableInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monom.cpp" />
@@ -70,6 +71,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/EHsc %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\korab\Documents\GitHub\mp2-lab1-polynom\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -87,6 +89,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\korab\Documents\GitHub\mp2-lab1-polynom\base;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

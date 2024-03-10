@@ -1,30 +1,32 @@
 ﻿#ifndef LINKEDLISTTABLE_H
 #define LINKEDLISTTABLE_H
 
+#include "TableInterface.h"
 #include <iostream>
 
 template <typename T>
-class LinkedListTable {
-    Node<T>* head; // Голова списка
-    int size; // Размер списка
+class LinkedListTable : public TableInterface<T> {
+private:
+    class Node {
+    public:
+        T data;
+        Node* next;
+
+        Node(T data, Node* next = nullptr) : data(data), next(next) {}
+    };
+
+    Node* head;
+    int size;
+
 public:
-    LinkedListTable();
+    LinkedListTable() : head(nullptr), size(0) {}
     ~LinkedListTable();
 
-    void add(const T& element); // Добавление полинома
-    void remove(const T& element); // Удаление полинома
-    T* find(const T& element) const; // Поиск полинома
-    void display() const; // Отображение таблицы
-    int getSize() const; // Получение размера таблицы
-
+    void add(const T& element) override;
+    void remove(const T& element) override;
+    bool find(const T& element) const override;
+    void display() const override;
 };
 
-template <typename T>
-class Node {
-public:
-    T data;
-    Node* next;
-    Node(T data, Node* next = nullptr);
-};
 
 #endif // LINKEDLISTTABLE_H

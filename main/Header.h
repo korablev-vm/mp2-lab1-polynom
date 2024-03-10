@@ -1,0 +1,8 @@
+#include "AVLTree.h"
+#include "ChainingHashTable.h"
+#include "LinearArrayTable.h"
+#include "LinkedListTable.h"
+#include "MenuDesign.h"
+#include "OpenAddressingHashTable.h"
+#include "Polinom.h"
+#include "SortedArrayTable.h"

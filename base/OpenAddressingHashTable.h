@@ -1,23 +1,33 @@
 ﻿#ifndef OPENADDRESSINGHASHTABLE_H
 #define OPENADDRESSINGHASHTABLE_H
 
+#include "TableInterface.h"
 #include <vector>
-using namespace std;
+#include <optional>
 
 template <typename T>
-class OpenAddressingHashTable {
-    vector<T> table; // Вектор для хранения элементов
-    int capacity; // Вместимость таблицы
-    int hashFunction(const T& element) const; // Хеш-функция
-public:
-    OpenAddressingHashTable(int size);
-    ~OpenAddressingHashTable();
+class OpenAddressingHashTable : public TableInterface<T> {
+private:
+    std::vector<std::optional<T>> table;
+    int capacity;
+    int size;
 
-    void add(const T& element);
-    void remove(const T& element);
-    bool find(const T& element) const;
-    void display() const;
-    
+    int hashFunction(const T& element, int attempt) const {
+
+        return (std::hash<T>()(element) + attempt) % capacity;
+    }
+
+public:
+    OpenAddressingHashTable(int size) : capacity(size), size(0) {
+        table.resize(capacity);
+    }
+
+    ~OpenAddressingHashTable() {}
+
+    void add(const T& element) override;
+    void remove(const T& element) override;
+    bool find(const T& element) const override;
+    void display() const override;
 };
 
 #endif // OPENADDRESSINGHASHTABLE_H

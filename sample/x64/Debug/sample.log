@@ -1,2 +1,3 @@
 ﻿  main.cpp
-  sample.vcxproj -> C:\Users\korab\Documents\GitHub\mp2-lab1-polynom\x64\Debug\sample_polynom.exe
+C:\Users\korab\Documents\GitHub\mp2-lab1-polynom\sample\main.cpp(8,2): error C2065: TableInterface: необъявленный идентификатор
+C:\Users\korab\Documents\GitHub\mp2-lab1-polynom\sample\main.cpp(10,2): error C2143: синтаксическая ошибка: отсутствие ";" перед "return"

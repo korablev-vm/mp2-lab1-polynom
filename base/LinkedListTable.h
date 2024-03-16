@@ -1,32 +1,67 @@
-﻿#ifndef LINKEDLISTTABLE_H
-#define LINKEDLISTTABLE_H
+﻿#ifndef LINEARLISTTABLE_H
+#define LINEARLISTTABLE_H
 
 #include "TableInterface.h"
+#include "List.h"
 #include <iostream>
+using namespace std;
 
-template <typename T>
-class LinkedListTable : public TableInterface<T> {
-private:
-    class Node {
-    public:
-        T data;
-        Node* next;
+template<typename TKey, typename TValue>
+struct TRecord {
+	TKey key;
+	TValue value;
 
-        Node(T data, Node* next = nullptr) : data(data), next(next) {}
-    };
+	bool operator<(const TRecord& rhs) const {
+		return key < rhs.key;
+	}
 
-    Node* head;
-    int size;
+	bool operator==(const TRecord& rhs) const {
+		return key == rhs.key;
+	}
 
-public:
-    LinkedListTable() : head(nullptr), size(0) {}
-    ~LinkedListTable();
-
-    void add(const T& element) override;
-    void remove(const T& element) override;
-    bool find(const T& element) const override;
-    void display() const override;
+	TRecord& operator+=(const TRecord& rhs) {
+		if (this->key == rhs.key) {
+			this->value += rhs.value;
+		}
+		return *this;
+	}
 };
 
+template<typename TKey, typename TValue>
+class TLinearListTable {
+	using T = TRecord<TKey, TValue>;
+	List<T> data;
 
-#endif // LINKEDLISTTABLE_H
+public:
+	TLinearListTable() = default;
+
+	void add(const T& element) {
+		data.insertInOrder(element);
+	}
+
+	void remove(const TKey& key) {
+		for (int i = 0; i < data.size(); ++i) {
+			if (data[i].key == key) {
+				data.erase(i);
+				return;
+			}
+		}
+	}
+
+	T* find(const TKey& key) {
+		for (int i = 0; i < data.size(); ++i) {
+			if (data[i].key == key) {
+				return &data[i];
+			}
+		}
+		return nullptr;
+	}
+
+	void display() const {
+		for (int i = 0; i < data.size(); ++i) {
+			cout << "Key: " << data[i].key << ", Value: " << data[i].value << endl;
+		}
+	}
+};
+
+#endif // LINEARLISTTABLE_H

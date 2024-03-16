@@ -1,4 +1,4 @@
-#include "Monom.h"
+﻿#include "Monom.h"
 #include <gtest.h>
 
 TEST(Monom, can_create_monom)

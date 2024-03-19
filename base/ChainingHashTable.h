@@ -11,7 +11,7 @@ template<typename TKey, typename TValue>
 class ChainingHashTable : public TableInterface<TRecord<TKey, TValue>> {
 	using T = TRecord<TKey, TValue>;
 	std::vector<std::list<T>> data; // Вектор списков для хранения элементов с одинаковыми хешами
-	size_t capacity; // Максимальное количество "корзин" в таблице
+	size_t capacity;
 
 	size_t hashKey(const TKey& key) const {
 		return std::hash<TKey>{}(key) % capacity;

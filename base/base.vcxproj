@@ -17,7 +17,7 @@
     <ClInclude Include="LinkedListTable.h" />
     <ClInclude Include="MenuDesign.h" />
     <ClInclude Include="Monom.h" />
-    <ClInclude Include="OpenAddressingHashTable.h" />
+    <ClInclude Include="RehashingHashTable.h" />
     <ClInclude Include="Operations.h" />
     <ClInclude Include="Polinom.h" />
     <ClInclude Include="SortedArrayTable.h" />

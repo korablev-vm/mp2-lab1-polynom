@@ -24,7 +24,7 @@
     <ClInclude Include="LinkedListTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OpenAddressingHashTable.h">
+    <ClInclude Include="RehashingHashTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SortedArrayTable.h">

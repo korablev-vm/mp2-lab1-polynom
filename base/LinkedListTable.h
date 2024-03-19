@@ -7,27 +7,6 @@
 using namespace std;
 
 template<typename TKey, typename TValue>
-struct TRecord {
-	TKey key;
-	TValue value;
-
-	bool operator<(const TRecord& rhs) const {
-		return key < rhs.key;
-	}
-
-	bool operator==(const TRecord& rhs) const {
-		return key == rhs.key;
-	}
-
-	TRecord& operator+=(const TRecord& rhs) {
-		if (this->key == rhs.key) {
-			this->value += rhs.value;
-		}
-		return *this;
-	}
-};
-
-template<typename TKey, typename TValue>
 class TLinearListTable {
 	using T = TRecord<TKey, TValue>;
 	List<T> data;

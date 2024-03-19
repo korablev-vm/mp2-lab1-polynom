@@ -4,61 +4,64 @@
 #include <vector>
 #include <optional>
 #include <functional>
+#include <iostream>
 #include "TableInterface.h"
 
-// Класс хеш-таблицы с повторным перемешиванием
 template<typename TKey, typename TValue>
-class RehashingHashTable : public TableInterface<TRecord<TKey, TValue>> {
-	using T = TRecord<TKey, TValue>;
-	std::vector<std::optional<T>> data; // Используем optional для хранения возможно пустых элементов
-	size_t capacity;
+class RehashingHashTable : public TableInterface<TKey, TValue> {
+    using T = TRecord<TKey, TValue>;
+    std::vector<std::optional<T>> data; // optional для хранения возможно пустых элементов
+    size_t capacity;
 
-	// Хеширующая функция, возвращающая индекс для ключа
-	size_t hashKey(const TKey& key) const {
-		return std::hash<TKey>{}(key) % capacity;
-	}
+    size_t hashKey(const TKey& key) const {
+        return std::hash<TKey>{}(key) % capacity;
+    }
 
 public:
-	RehashingHashTable(size_t initCapacity = 101) : capacity(initCapacity) {
-		data.resize(capacity);
-	}
+    RehashingHashTable(size_t initCapacity = 101) : capacity(initCapacity) {
+        data.resize(capacity);
+    }
 
-	void add(const T& element) override {
-		size_t index = hashKey(element.key);
-		while (data[index].has_value()) { // Поиск следующего пустого места при коллизии
-			index = (index + 1) % capacity; // Линейное пробирование
-		}
-		data[index] = element;
-	}
+    void add(const TKey& key, const TValue& value) override {
+        T element{ key, value };
+        size_t index = hashKey(key);
+        while (data[index].has_value()) {
+            if (data[index]->key == key) {
+                return;
+            }
+            index = (index + 1) % capacity;
+        }
+        data[index] = element;
+    }
 
-	void remove(const T& element) override {
-		size_t index = hashKey(element.key);
-		while (data[index].has_value() && data[index]->key != element.key) {
-			index = (index + 1) % capacity; // Линейное пробирование при поиске
-		}
-		if (data[index].has_value()) {
-			data[index].reset(); // Сброс значения, если элемент найден
-		}
-	}
+    void remove(const TKey& key) override {
+        size_t index = hashKey(key);
+        while (data[index].has_value() && data[index]->key != key) {
+            index = (index + 1) % capacity;
+        }
+        if (data[index].has_value()) {
+            data[index].reset();
+        }
+    }
 
-	T* find(const T& element) const override {
-		size_t index = hashKey(element.key);
-		while (data[index].has_value() && data[index]->key != element.key) {
-			index = (index + 1) % capacity;
-		}
-		if (data[index].has_value()) {
-			return &data[index].value();
-		}
-		return nullptr;
-	}
+    TValue* find(const TKey& key) const override {
+        size_t index = hashKey(key);
+        while (data[index].has_value() && data[index]->key != key) {
+            index = (index + 1) % capacity;
+        }
+        if (data[index].has_value()) {
+            return &data[index]->value;
+        }
+        return nullptr;
+    }
 
-	void display() const override {
-		for (const auto& item : data) {
-			if (item.has_value()) {
-				std::cout << "Key: " << item->key << ", Value: " << item->value << std::endl;
-			}
-		}
-	}
+    void display() const override {
+        for (const auto& item : data) {
+            if (item.has_value()) {
+                std::cout << "Key: " << item->key << ", Value: " << item->value << std::endl;
+            }
+        }
+    }
 };
 
 #endif // REHASHINGHASHTABLE_H

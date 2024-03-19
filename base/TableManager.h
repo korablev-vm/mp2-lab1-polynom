@@ -1,4 +1,7 @@
-﻿#include <vector>
+﻿#ifndef TABLEMANAGER_H
+#define TABLEMANAGER_H
+
+#include <vector>
 #include <memory>
 #include <stdexcept>
 #include "TableInterface.h"
@@ -17,7 +20,6 @@ public:
         }
     }
 
-    // Установка активной таблицы для операций поиска и отображения
     void setActiveTable(int index) {
         if (index < 0 || index >= tables.size()) {
             throw std::out_of_range("Индекс активной таблицы вне допустимого диапазона");
@@ -57,3 +59,5 @@ public:
         tables[activeTableIndex]->display();
     }
 };
+
+#endif

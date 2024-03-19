@@ -23,6 +23,7 @@
     <ClInclude Include="SortedArrayTable.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="TableInterface.h" />
+    <ClInclude Include="TableManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monom.cpp" />

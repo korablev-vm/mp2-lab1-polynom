@@ -51,6 +51,9 @@
     <ClInclude Include="TableInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TableManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monom.cpp">

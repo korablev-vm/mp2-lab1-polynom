@@ -45,10 +45,10 @@
     <ClCompile Include="test_chainingHashTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_openAddressingHashTable.cpp">
+    <ClCompile Include="test_linkedListTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_linkedListTable.cpp">
+    <ClCompile Include="test_rehashingHashTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -17,11 +17,13 @@
     <ClInclude Include="LinkedListTable.h" />
     <ClInclude Include="MenuDesign.h" />
     <ClInclude Include="Monom.h" />
+    <ClInclude Include="postfix.h" />
     <ClInclude Include="RehashingHashTable.h" />
     <ClInclude Include="Operations.h" />
     <ClInclude Include="Polinom.h" />
     <ClInclude Include="SortedArrayTable.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="stack.h" />
     <ClInclude Include="TableInterface.h" />
     <ClInclude Include="TableManager.h" />
   </ItemGroup>

@@ -90,9 +90,9 @@
     <ClCompile Include="test_list.cpp" />
     <ClCompile Include="test_main.cpp" />
     <ClCompile Include="test_monom.cpp" />
-    <ClCompile Include="test_openAddressingHashTable.cpp" />
     <ClCompile Include="test_polynom.cpp" />
     <ClCompile Include="test_postfix.cpp" />
+    <ClCompile Include="test_rehashingHashTable.cpp" />
     <ClCompile Include="test_sortedArrayTable.cpp" />
     <ClCompile Include="test_stack.cpp" />
   </ItemGroup>

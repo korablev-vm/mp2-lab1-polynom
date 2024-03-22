@@ -54,6 +54,12 @@
     <ClInclude Include="TableManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="postfix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monom.cpp">

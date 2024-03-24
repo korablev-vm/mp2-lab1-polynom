@@ -1,50 +1,45 @@
 ﻿#ifndef LINEARARRAYTABLE_H
 #define LINEARARRAYTABLE_H
 
+#include <algorithm>
 #include <iostream>
 #include "TableInterface.h"
-using namespace std;
 
 template<typename TKey, typename TValue>
-class TUnorderedTable : public TableInterface<TRecord<TKey, TValue>> {
-	using T = TRecord<TKey, TValue>;
-	vector<T> data;
+class TUnorderedTable : public TableInterface<TKey, TValue> {
+    using T = TRecord<TKey, TValue>;
+    std::vector<T> data;
 
 public:
-	TUnorderedTable() = default;
+    TUnorderedTable() = default;
 
-	void add(const T& element) override {
-		// лямбда-выражение для сравнения ключей
-		auto it = find_if(data.begin(), data.end(), [&element](const T& item) {return item.key == element.key; });
-		if (it == data.end())
-			data.push_back(element);
-	}
+    void add(const TRecord<TKey, TValue>& record) override {
+        auto it = std::find_if(data.begin(), data.end(), [&record](const T& item) { return item.key == record.key; });
+        if (it == data.end()) {
+            data.push_back(record);
+        }
+    }
 
-	void remove(const T& element) override {
-		auto it = find_if(data.begin(), data.end(), [&element](const T& item) {
-			return item.key == element.key;
-			});
-		if (it != data.end()) {
-			data.erase(it);
-		}
-	}
+    void remove(const TKey& key) override {
+        auto it = std::find_if(data.begin(), data.end(), [&key](const T& item) { return item.key == key; });
+        if (it != data.end()) {
+            data.erase(it);
+        }
+    }
 
-	T* find(const T& element) const override {
-		auto it = find_if(data.begin(), data.end(), [&element](const T& item) {
-			return item.key == element.key;
-			});
-		if (it != data.end()) {
-			return &(*it);
-		}
-		return nullptr;
-	}
+    TValue* find(const TKey& key) override {
+        auto it = std::find_if(data.begin(), data.end(), [&key](const T& item) { return item.key == key; });
+        if (it != data.end()) {
+            return &(it->value);
+        }
+        return nullptr;
+    }
 
-	void display() const override {
-		for (const auto& item : data) {
-			cout << "Key: " << item.key << ", Value: " << item.value << endl;
-		}
-	}
+    void display() const override {
+        for (const auto& item : data) {
+            std::cout << "Key: " << item.key << ", Value: " << item.value << std::endl;
+        }
+    }
 };
-
 
 #endif // LINEARARRAYTABLE_H

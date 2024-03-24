@@ -6,8 +6,6 @@
 #include <locale>
 #include <iostream>
 
-using namespace std;
-
 enum TColor {
 	BLACK, BLUE, GREEN, CYAN, RED, MAGENTA, BROWN, LIGHTGRAY,
 	DARKGRAY, LIGHTBLUE, LIGHTGREEN, LIGHTCYAN, LIGHTRED,
@@ -93,7 +91,7 @@ void textcolor(int color)
 	wchar_t  ch;
 	pos = wherexy();
 	ReadConsoleOutputCharacter(Console, &ch, 1, pos, &Count);
-	wcout << ch;
+	std::wcout << ch;
 	gotoxy(pos.X, pos.Y);
 }
 
@@ -112,13 +110,13 @@ void hidecursor(void)
 void exit_prog()
 {
 	system("cls");
-	cout << "Спасибо за использование программы!" << endl;
-	cout << "До свидания" << endl;
+	std::cout << "Спасибо за использование программы!" << std::endl;
+	std::cout << "До свидания" << std::endl;
 	system("pause");
 	exit(0);
 }
 
-int menu_mode_clear(string* arr, int size)
+int menu_mode_clear(std::string* arr, int size)
 {
 	char ch = 0;
 	int choice = 1, i;
@@ -135,7 +133,7 @@ int menu_mode_clear(string* arr, int size)
 			{
 				textcolor(WHITE);
 			}
-			cout << arr[i] << endl;
+			std::cout << arr[i] << std::endl;
 		}
 		hidecursor();
 		textcolor(WHITE);

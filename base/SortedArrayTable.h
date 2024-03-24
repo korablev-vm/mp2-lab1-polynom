@@ -14,11 +14,10 @@ class TSortedTable : public TableInterface<TKey, TValue> {
 public:
     TSortedTable() = default;
 
-    void add(const TKey& key, const TValue& value) override {
-        T element{ key, value };
-        auto it = std::lower_bound(data.begin(), data.end(), element);
-        if (it == data.end() || it->key != key) {
-            data.insert(it, element);
+    void add(const TRecord<TKey, TValue>& record) override {
+        auto it = std::lower_bound(data.begin(), data.end(), record);
+        if (it == data.end() || it->key != record.key) {
+            data.insert(it, record);
         }
     }
 
@@ -30,7 +29,7 @@ public:
         }
     }
 
-    TValue* find(const TKey& key) const override {
+    TValue* find(const TKey& key) override {
         T element{ key, TValue() };
         auto it = std::lower_bound(data.begin(), data.end(), element);
         if (it != data.end() && it->key == key) {

@@ -22,16 +22,16 @@ public:
         data.resize(capacity);
     }
 
-    void add(const TKey& key, const TValue& value) override {
-        T element{ key, value };
-        size_t index = hashKey(key);
+    void add(const TRecord<TKey, TValue>& record) override {
+        size_t index = hashKey(record.key);
         while (data[index].has_value()) {
-            if (data[index]->key == key) {
+            if (data[index]->key == record.key) {
+                data[index] = record;
                 return;
             }
             index = (index + 1) % capacity;
         }
-        data[index] = element;
+        data[index] = record;
     }
 
     void remove(const TKey& key) override {
@@ -44,13 +44,13 @@ public:
         }
     }
 
-    TValue* find(const TKey& key) const override {
+    TValue* find(const TKey& key) override {
         size_t index = hashKey(key);
         while (data[index].has_value() && data[index]->key != key) {
             index = (index + 1) % capacity;
         }
         if (data[index].has_value()) {
-            return &data[index]->value;
+            return &(data[index]->value);
         }
         return nullptr;
     }

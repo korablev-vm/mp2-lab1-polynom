@@ -6,14 +6,14 @@
 #include <stdexcept>
 #include "TableInterface.h"
 
-template<typename T>
+template<typename TKey, typename TValue>
 class TableManager {
 private:
-    std::vector<std::shared_ptr<TableInterface<T>>> tables;
-    int activeTableIndex = 0;
+    std::vector<std::shared_ptr<TableInterface<TKey, TValue>>> tables;
+    int activeTableIndex = -1; // Изначально нет активной таблицы
 
 public:
-    void addTable(std::shared_ptr<TableInterface<T>> table) {
+    void addTable(std::shared_ptr<TableInterface<TKey, TValue>> table) {
         tables.push_back(table);
         if (tables.size() == 1) {
             setActiveTable(0);
@@ -27,29 +27,37 @@ public:
         activeTableIndex = index;
     }
 
-    void add(const T& element) {
+    void add(const TRecord<TKey, TValue>& record) {
         if (tables.empty()) {
             throw std::runtime_error("Нет добавленных таблиц для операции добавления");
         }
-        for (auto& table : tables) {
-            table->add(element);
-        }
+        tables[activeTableIndex]->add(record);
     }
 
-    void remove(const T& element) {
+    void remove(const TKey& key) {
         if (tables.empty()) {
             throw std::runtime_error("Нет добавленных таблиц для операции удаления");
         }
+        tables[activeTableIndex]->remove(key);
+    }
+
+    void addAll(const TRecord<TKey, TValue>& record) {
         for (auto& table : tables) {
-            table->remove(element);
+            table->add(record);
         }
     }
 
-    T* find(const T& element) const {
+    void removeAll(const TKey& key) {
+        for (auto& table : tables) {
+            table->remove(key);
+        }
+    }
+
+    TValue* find(const TKey& key) const {
         if (tables.empty()) {
             throw std::runtime_error("Нет добавленных таблиц для операции поиска");
         }
-        return tables[activeTableIndex]->find(element);
+        return tables[activeTableIndex]->find(key);
     }
 
     void display() const {
@@ -60,4 +68,4 @@ public:
     }
 };
 
-#endif
+#endif // TABLEMANAGER_H

@@ -4,43 +4,42 @@
 #include "TableInterface.h"
 #include "List.h"
 #include <iostream>
-using namespace std;
 
 template<typename TKey, typename TValue>
-class TLinearListTable {
-	using T = TRecord<TKey, TValue>;
-	List<T> data;
+class TLinearListTable : public TableInterface<TKey, TValue> {
+    using T = TRecord<TKey, TValue>;
+    List<T> data;
 
 public:
-	TLinearListTable() = default;
+    TLinearListTable() = default;
 
-	void add(const T& element) {
-		data.insertInOrder(element);
-	}
+    void add(const TRecord<TKey, TValue>& record) override {
+        data.insertInOrder(record);
+    }
 
-	void remove(const TKey& key) {
-		for (int i = 0; i < data.size(); ++i) {
-			if (data[i].key == key) {
-				data.erase(i);
-				return;
-			}
-		}
-	}
+    void remove(const TKey& key) override {
+        for (int i = 0; i < data.size(); ++i) {
+            if (data[i].key == key) {
+                data.erase(i);
+                return;
+            }
+        }
+    }
 
-	T* find(const TKey& key) {
-		for (int i = 0; i < data.size(); ++i) {
-			if (data[i].key == key) {
-				return &data[i];
-			}
-		}
-		return nullptr;
-	}
+    TValue* find(const TKey& key) override {
+        for (int i = 0; i < data.size(); ++i) {
+            if (data[i].key == key) {
+                return &data[i].value;
+            }
+        }
+        return nullptr;
+    }
 
-	void display() const {
-		for (int i = 0; i < data.size(); ++i) {
-			cout << "Key: " << data[i].key << ", Value: " << data[i].value << endl;
-		}
-	}
+    void display() const override {
+        for (int i = 0; i < data.size(); ++i) {
+            std::cout << "Key: " << data[i].key << ", Value: " << data[i].value << std::endl;
+        }
+    }
 };
 
 #endif // LINEARLISTTABLE_H

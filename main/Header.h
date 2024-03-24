@@ -3,6 +3,7 @@
 #include "LinearArrayTable.h"
 #include "LinkedListTable.h"
 #include "MenuDesign.h"
-#include "OpenAddressingHashTable.h"
+#include "RehashingHashTable.h"
 #include "Polinom.h"
 #include "SortedArrayTable.h"
+#include <TableManager.h>

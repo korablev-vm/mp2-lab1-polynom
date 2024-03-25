@@ -133,18 +133,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\base_test\test_AVLTree.cpp" />
-    <ClCompile Include="..\base_test\test_chainingHashTable.cpp" />
-    <ClCompile Include="..\base_test\test_linearArrayTable.cpp" />
-    <ClCompile Include="..\base_test\test_linkedListTable.cpp" />
-    <ClCompile Include="..\base_test\test_list.cpp" />
-    <ClCompile Include="..\base_test\test_main.cpp" />
-    <ClCompile Include="..\base_test\test_monom.cpp" />
-    <ClCompile Include="..\base_test\test_polynom.cpp" />
-    <ClCompile Include="..\base_test\test_postfix.cpp" />
-    <ClCompile Include="..\base_test\test_rehashingHashTable.cpp" />
-    <ClCompile Include="..\base_test\test_sortedArrayTable.cpp" />
-    <ClCompile Include="..\base_test\test_stack.cpp" />
+    <ClCompile Include="test_AVLTree.cpp" />
+    <ClCompile Include="test_chainingHashTable.cpp" />
+    <ClCompile Include="test_linearArrayTable.cpp" />
+    <ClCompile Include="test_linkedListTable.cpp" />
+    <ClCompile Include="test_list.cpp" />
+    <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="test_monom.cpp" />
+    <ClCompile Include="test_polynom.cpp" />
+    <ClCompile Include="test_postfix.cpp" />
+    <ClCompile Include="test_rehashingHashTable.cpp" />
+    <ClCompile Include="test_sortedArrayTable.cpp" />
+    <ClCompile Include="test_stack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

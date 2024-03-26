@@ -16,7 +16,7 @@ class TPostfix
 {
 	std::vector<std::string> infix;
 	std::string infix_str;
-	std::vector<string> postfix;
+	std::vector<std::string> postfix;
 	std::string postfix_str;
 	std::map<std::string, double> operands;
 	std::map<std::string, double> constants;
@@ -32,7 +32,7 @@ private:
 
 public:
 	std::vector<std::string> GetAllVariables();
-	double Calculate(std::vector<double> values_or_operands = {}); //Зависит от доступа к полиномам по именам
+	double Calculate(std::vector<double> values_of_operands = {}); //Зависит от доступа к полиномам по именам
 };
 
 template <typename T, typename TKey, typename TValue>
@@ -50,7 +50,7 @@ TPostfix<T, TKey, TValue>::TPostfix(std::string str, TableManager<TKey, TValue>*
 template <typename T, typename TKey, typename TValue>
 void TPostfix<T, TKey, TValue>::ToInfix()
 {
-	string element, operand;
+	std::string element, operand;
 	Operations<T> op;
 	for (size_t i = 0; i < infix_str.size(); i++)
 	{
@@ -91,9 +91,9 @@ void TPostfix<T, TKey, TValue>::CheckOfExpression()
 	}
 	else
 	{
-		if (!((infix[0].find_first_not_of("0123456789,") == string::npos)
+		if (!((infix[0].find_first_not_of("0123456789,") == std::string::npos)
 			|| ((infix[0].find_first_of("0123456789") > infix[0].find_last_not_of("0123456789"))
-				&& (infix[0].find_first_of(".,<>?/|!@#$&={}[]:;\"'") == string::npos))))
+				&& (infix[0].find_first_of(".,<>?/|!@#$&={}[]:;\"'") == std::string::npos))))
 			throw "Expression is wrong, check operands";
 	}
 	if ((op.IfIsOperation(infix[infix.size() - 1])) && (infix[infix.size() - 1] != ")"))
@@ -118,9 +118,9 @@ void TPostfix<T, TKey, TValue>::CheckOfExpression()
 		{
 			if ((!op.IfIsOperation(infix[i - 1])) || (infix[i - 1] == ")"))
 				throw "Expression is wrong, check operands";
-			if (!((infix[i].find_first_not_of("0123456789,") == string::npos)
+			if (!((infix[i].find_first_not_of("0123456789,") == std::string::npos)
 				|| ((infix[i].find_first_of("0123456789") > infix[i].find_last_not_of("0123456789"))
-					&& (infix[i].find_first_of(".,<>?/|!@#$&={}[]:;\"'") == string::npos))))
+					&& (infix[i].find_first_of(".,<>?/|!@#$&={}[]:;\"'") == std::string::npos))))
 				throw "Expression is wrong, check operands";
 		}
 	}
@@ -154,9 +154,9 @@ void TPostfix<T, TKey, TValue>::ToPostfix()
 		}
 		else
 		{
-			if ((infix[i].find_first_not_of("0123456789,") == string::npos) && (constants.count(infix[i]) == 0))
+			if ((infix[i].find_first_not_of("0123456789,") == std::string::npos) && (constants.count(infix[i]) == 0))
 				constants.emplace(infix[i], stod(infix[i]));
-			else if ((infix[i].find_first_not_of("0123456789,") != string::npos) && (operands.count(infix[i]) == 0))
+			else if ((infix[i].find_first_not_of("0123456789,") != std::string::npos) && (operands.count(infix[i]) == 0))
 				operands.emplace(infix[i], 0.0);
 			postfix.push_back(infix[i]);
 		}
@@ -172,12 +172,14 @@ void TPostfix<T, TKey, TValue>::ToPostfix()
 
 
 template <typename T, typename TKey, typename TValue>
-double TPostfix<T, TKey, TValue>::Calculate(std::vector<double> values_or_operands)
+double TPostfix<T, TKey, TValue>::Calculate(std::vector<double> values_of_operands)
 {
+	Operations<T> op;
+	TStack st;
 	if (manager != nullptr)
 	{
 		TValue* tmp;
-		for (auto it = operands.begin(); it != operands.end(); it++, i++)
+		for (auto it = operands.begin(); it != operands.end(); it++)
 		{
 			tmp = manager.find(it->first);
 			if (tmp != nullptr)
@@ -188,7 +190,7 @@ double TPostfix<T, TKey, TValue>::Calculate(std::vector<double> values_or_operan
 	}
 	else
 	{
-		for (auto it = operands.begin(); it != operands.end(); it++, i++)
+		for (auto it = operands.begin(); it != operands.end(); it++)
 			it->second = values_of_operands[it->first];
 	}
 

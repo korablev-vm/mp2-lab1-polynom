@@ -23,22 +23,22 @@ public:
 		operation.emplace("^", std::vector<int>{ 3, 2 });
 	};
 
-	bool IfIsOperation(string op) const
+	bool IfIsOperation(std::string op) const
 	{
 		return(!(operation.find(op) == operation.end()));
 	};
 
-	int GetPriority(string op) const
+	int GetPriority(std::string op) const
 	{
 		return operation.at(op)[0];
 	};
 
-	int GetArity(string op) const
+	int GetArity(std::string op) const
 	{
 		return operation.at(op)[1];
 	};
 
-	T Calculation(const string& op, T first, int second)
+	T Calculation(const std::string& op, T first, int second)
 	{
 		T result(first);
 		for (int i = 0; i < second; i++)
@@ -46,7 +46,7 @@ public:
 		return result;
 	};
 
-	T Calculation(const string& op, T first, T second)
+	T Calculation(const std::string& op, T first, T second)
 	{
 		if (op == "+")
 			return (first + second);
@@ -56,11 +56,11 @@ public:
 			return (first * second);
 		if (op == "/")
 		{
-			if (second == 0) throw runtime_error("Division by zero.");
+			if (second == 0) throw std::runtime_error("Division by zero.");
 			return (first / second);
 		}
 		// Добавить исключение или возвращаемое значение по умолчанию для неподдерживаемых операций
-		throw invalid_argument("Unsupported operation: " + op);
+		throw std::invalid_argument("Unsupported operation: " + op);
 	};
 };
 

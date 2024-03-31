@@ -6,7 +6,7 @@
 #include <string>
 #include <cmath>
 
-template <class T>
+template <typename T1, typename T2>
 class Operations
 {
     std::map<std::string, std::vector<int>> operation;
@@ -20,7 +20,6 @@ public:
         operation.emplace("-", std::vector<int>{1, 2});
         operation.emplace("*", std::vector<int>{2, 2});
         operation.emplace("/", std::vector<int>{2, 2});
-        operation.emplace("^", std::vector<int>{3, 2});
     };
 
     bool IfIsOperation(std::string op) const
@@ -38,15 +37,7 @@ public:
         return operation.at(op)[1];
     };
 
-    T Calculation(const std::string& op, T first, int second)
-    {
-        T result(first);
-        for (int i = 0; i < second; i++)
-            result += first;
-        return result;
-    };
-
-    T Calculation(const std::string& op, T first, T second)
+    T1 Calculation(const std::string& op, T1 first, T2 second)
     {
         if (op == "+")
             return (first + second);
@@ -58,7 +49,7 @@ public:
         {
             if (second == 0)
                 throw std::runtime_error("Division by zero.");
-            return (first / second);
+            return (second / first);
         }
     };
 };

@@ -11,7 +11,7 @@
 #include "Polinom.h"
 #include "TableManager.h"
 
-template <typename T, typename TKey>
+template <typename TKey>
 class TPostfix
 {
 	std::vector<std::string> infix;
@@ -36,8 +36,8 @@ public:
 	double Calculate(std::vector<double> values_of_operands = {});
 };
 
-template <typename T, typename TKey>
-TPostfix<T, TKey>::TPostfix(std::string str, const TableManager<TKey, Polinom>& _manager)
+template <typename TKey>
+TPostfix<TKey>::TPostfix(std::string str, const TableManager<TKey, Polinom>& _manager)
 {
 	manager = _manager;
 	for (size_t i = 0; i < str.size(); i++)
@@ -49,11 +49,11 @@ TPostfix<T, TKey>::TPostfix(std::string str, const TableManager<TKey, Polinom>& 
 	ToPostfix();
 }
 
-template <typename T, typename TKey>
-void TPostfix<T, TKey>::ToInfix()
+template <typename TKey>
+void TPostfix<TKey>::ToInfix()
 {
 	std::string element, operand;
-	Operations<T, T> op;
+	Operations<int, int> op;
 	for (size_t i = 0; i < infix_str.size(); i++)
 	{
 		element = infix_str[i];
@@ -78,11 +78,11 @@ void TPostfix<T, TKey>::ToInfix()
 		infix.push_back(operand);
 }
 
-template <typename T, typename TKey>
-void TPostfix<T, TKey>::CheckOfExpression()
+template <typename TKey>
+void TPostfix<TKey>::CheckOfExpression()
 {
 	int count_of_left = 0, count_of_right = 0;
-	Operations<T, T> op;
+	Operations<int, int> op;
 	if (op.IfIsOperation(infix[0]))
 	{
 		if (infix[0] == "(")
@@ -136,11 +136,11 @@ void TPostfix<T, TKey>::CheckOfExpression()
 		throw "Expression is wrong, check brackets";
 }
 
-template <typename T, typename TKey>
-void TPostfix<T, TKey>::ToPostfix()
+template <typename TKey>
+void TPostfix<TKey>::ToPostfix()
 {
 	TStack<std::string> st(infix.size());
-	Operations<T, T> op;
+	Operations<int, int> op;
 	for (size_t i = 0; i < infix.size(); i++)
 	{
 		if (op.IfIsOperation(infix[i]))
@@ -178,8 +178,8 @@ void TPostfix<T, TKey>::ToPostfix()
 	}
 }
 
-template <typename T, typename TKey>
-double TPostfix<T, TKey>::Calculate(std::vector<double> values)
+template <typename TKey>
+double TPostfix<TKey>::Calculate(std::vector<double> values)
 {
 	Polinom res_polinom = CreateNewPolinom();
 	std::map<std::string, double> values_of_variables;
@@ -189,14 +189,14 @@ double TPostfix<T, TKey>::Calculate(std::vector<double> values)
 	return res_polinom.Calculation(values_of_variables);
 }
 
-template <typename T, typename TKey>
-std::vector<std::string> TPostfix<T, TKey>::GetAllVariables()
+template <typename TKey>
+std::vector<std::string> TPostfix<TKey>::GetAllVariables()
 {
 	Polinom tmp;
 	return tmp.GetAllVariables();
 }
-template<typename T, typename TKey>
-Polinom TPostfix<T, TKey>::CreateNewPolinom()
+template<typename TKey>
+Polinom TPostfix<TKey>::CreateNewPolinom()
 {
 	Operations<Polinom, Polinom> op;
 	TStack<Polinom> st;

@@ -18,7 +18,7 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 static int cPosY = 0;
 static int cMaxY = 0;
 Polinom new_polinom;
-TPostfix<double, std::string>* postfix;
+TPostfix<std::string>* postfix;
 HFONT hFont = CreateFont(16, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
 	CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, VARIABLE_PITCH, "Arial");
 
@@ -376,7 +376,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 
 								try
 								{
-									postfix = new TPostfix<double, std::string>(val, manager);
+									postfix = new TPostfix<std::string>(val, manager);
 								}
 								catch (std::string ex)
 								{
@@ -509,7 +509,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 
 								try
 								{
-									TPostfix<double, std::string> postfix(val, manager);
+									TPostfix<std::string> postfix(val, manager);
 									new_polinom = postfix.CreateNewPolinom();
 								}
 								catch (std::string ex)
@@ -625,17 +625,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 						{
 							GetClientRect(hWnd, &rc);
 							hButton[0] = CreateWindow("BUTTON", "Unordered Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.left + 5,
-								rc.top + 25, 140, 20, hWnd, reinterpret_cast<HMENU>(1301), nullptr, nullptr);
+								rc.top + 25, 140, 23, hWnd, reinterpret_cast<HMENU>(1301), nullptr, nullptr);
 							hButton[0] = CreateWindow("BUTTON", "Sorted Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.left + 5,
-								rc.bottom - 45, 140, 20, hWnd, reinterpret_cast<HMENU>(1302), nullptr, nullptr);
+								rc.bottom - 45, 140, 23, hWnd, reinterpret_cast<HMENU>(1302), nullptr, nullptr);
 							hButton[0] = CreateWindow("BUTTON", "Rehashing Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right - 145,
-								rc.top + 25, 140, 20, hWnd, reinterpret_cast<HMENU>(1303), nullptr, nullptr);
+								rc.top + 25, 140, 23, hWnd, reinterpret_cast<HMENU>(1303), nullptr, nullptr);
 							hButton[0] = CreateWindow("BUTTON", "Chaining Hash Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right - 145,
-								rc.bottom - 45, 140, 20, hWnd, reinterpret_cast<HMENU>(1304), nullptr, nullptr);
-							hButton[0] = CreateWindow("BUTTON", "Linked List Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right / 2 - 70,
-								rc.top + 25, 140, 20, hWnd, reinterpret_cast<HMENU>(1305), nullptr, nullptr);
-							hButton[0] = CreateWindow("BUTTON", "RedBlack Tree Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right / 2 - 70,
-								rc.bottom - 45, 140, 20, hWnd, reinterpret_cast<HMENU>(1306), nullptr, nullptr);
+								rc.bottom - 45, 140, 23, hWnd, reinterpret_cast<HMENU>(1304), nullptr, nullptr);
+							hButton[0] = CreateWindow("BUTTON", "Linked List Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right / 2 - 72,
+								rc.top + 25, 144, 23, hWnd, reinterpret_cast<HMENU>(1305), nullptr, nullptr);
+							hButton[0] = CreateWindow("BUTTON", "RedBlack Tree Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right / 2 - 72,
+								rc.bottom - 45, 144, 23, hWnd, reinterpret_cast<HMENU>(1306), nullptr, nullptr);
 						}
 						return 0;
 						case WM_COMMAND:
@@ -645,36 +645,42 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 							case 1301:
 							{
 								manager.setActiveTable(0);
+								RedrawWindow(hwnd, nullptr, nullptr, true);
 								DestroyWindow(hWnd);
 							}
 							return 0;
 							case 1302:
 							{
 								manager.setActiveTable(1);
+								RedrawWindow(hwnd, nullptr, nullptr, true);
 								DestroyWindow(hWnd);
 							}
 							return 0;
 							case 1303:
 							{
 								manager.setActiveTable(2);
+								RedrawWindow(hwnd, nullptr, nullptr, true);
 								DestroyWindow(hWnd);
 							}
 							return 0;
 							case 1304:
 							{
 								manager.setActiveTable(3);
+								RedrawWindow(hwnd, nullptr, nullptr, true);
 								DestroyWindow(hWnd);
 							}
 							return 0;
 							case 1305:
 							{
 								manager.setActiveTable(4);
+								RedrawWindow(hwnd, nullptr, nullptr, true);
 								DestroyWindow(hWnd);
 							}
 							return 0;
 							case 1306:
 							{
 								manager.setActiveTable(5);
+								RedrawWindow(hwnd, nullptr, nullptr, true);
 								DestroyWindow(hWnd);
 							}
 							return 0;

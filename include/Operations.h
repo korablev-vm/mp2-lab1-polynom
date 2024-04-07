@@ -52,12 +52,15 @@ public:
         }
     }
 
-    T1 CalculationAr2(const std::string& op, T1 first, T2 second)
+    Polinom CalculationAr2(const std::string& op, T1 first, T2 second)
     {
         if (op == "+")
             return (first + second);
         if (op == "-")
-            return (second - first);
+        {
+            Polinom res = second - first;
+            return (res);
+        }
         if (op == "*")
             return (first * second);
     };

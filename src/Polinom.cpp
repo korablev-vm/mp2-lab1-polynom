@@ -105,7 +105,11 @@ void Polinom::operator+=(Polinom& new_exp)
 			j++;
 		}
 		if ((i < this->expression.size()) && (this->expression[i].is_empty()))
+		{
 			this->expression.erase(i);
+			if (i==0)
+				this->expression.insertInOrder(Monom(0, 0, std::map<std::string, int>{}));
+		}
 	}
 	while (j < new_exp.expression.size())
 	{
@@ -209,7 +213,7 @@ Polinom operator-(Polinom& first, Polinom& second)
 {
 	Polinom res(second);
 	res *= -1;
-	res += second;
+	res += first;
 	return res;
 }
 

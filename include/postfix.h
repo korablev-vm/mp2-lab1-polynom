@@ -110,20 +110,20 @@ void TPostfix<T, TKey>::CheckOfExpression()
 			if (infix[i] == ")")
 				count_of_right++;
 			if ((op.IfIsOperation(infix[i - 1]))
-				&& (op.GetArity(infix[i]) > 1) && (infix[i] != "-") && (infix[i] != "Diff") && (infix[i] != "Integr") 
+				&& (op.GetArity(infix[i]) > 1) && (infix[i] != "-") && (infix[i] != "Diff") && (infix[i] != "Integr")
 				&& (infix[i - 1] != ")"))
 				throw "Expression is wrong, check operations";
-				if ((infix[i] == "-") && (op.GetArity(infix[i - 1]) > 0))
-					throw "Expression is wrong, check operations";
-				if ((infix[i - 1] == ")") && ((op.GetArity(infix[i]) == 1) || (infix[i] == "Diff") || (infix[i] == "Integr")))
+			if ((op.IfIsOperation(infix[i - 1]))&&(infix[i] == "-") && (op.GetArity(infix[i - 1]) > 0))
 				throw "Expression is wrong, check operations";
-				else if (!op.IfIsOperation(infix[i - 1]) && ((op.GetArity(infix[i]) < 2) && (infix[i] != ")")
-					|| (infix[i] == "Diff") || (infix[i] == "Integr")))
-					throw "Expression is wrong, check operations";
+			if ((infix[i - 1] == ")") && ((op.GetArity(infix[i]) == 1) || (infix[i] == "Diff") || (infix[i] == "Integr")))
+				throw "Expression is wrong, check operations";
+			else if (!op.IfIsOperation(infix[i - 1]) && ((op.GetArity(infix[i]) < 2) && (infix[i] != ")")
+				|| (infix[i] == "Diff") || (infix[i] == "Integr")))
+				throw "Expression is wrong, check operations";
 		}
 		else
 		{
-			if ((!op.IfIsOperation(infix[i - 1])) && ((i > 1) && ((infix[i - 2] != "Diff") || (infix[i - 2] != "Integr"))) 
+			if ((!op.IfIsOperation(infix[i - 1])) && ((i > 1) && ((infix[i - 2] != "Diff") || (infix[i - 2] != "Integr")))
 				|| (infix[i - 1] == ")"))
 				throw "Expression is wrong, check operands";
 			if (!((infix[i].find_first_not_of("0123456789,") == std::string::npos)

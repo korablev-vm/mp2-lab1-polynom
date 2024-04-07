@@ -21,6 +21,7 @@ Polinom new_polinom;
 TPostfix<std::string>* postfix;
 HFONT hFont = CreateFont(16, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
 	CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, VARIABLE_PITCH, "Arial");
+HWND messageBox{};
 
 bool checkOfKey(std::string str)
 {
@@ -114,7 +115,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 		case WM_CREATE:
 		{
 			std::string helloStr = "Hello!\nThis is a polynomial calculator, that provides the following options:\n - adding a polynom to the table;\n - removing a polynom from the table;\n - calculating an expression from polynoms and\n\t - calculating it at a point,\n\t - saving it as a new polynom;\n - selecting the active table (initially, it is an Unsorted Table).";
-			MessageBox(hWnd, helloStr.c_str(), "Info", MB_ICONINFORMATION);
+			MessageBox(messageBox, helloStr.c_str(), "Info", MB_ICONINFORMATION);
 			HMENU hMenu = CreateMenu();
 			AppendMenu(hMenu, MF_STRING, 1001, "Add");
 			AppendMenu(hMenu, MF_STRING, 1002, "Delete");
@@ -239,7 +240,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 								if (checkOfKey(text1))
 									manager.addAll(TRecord<std::string, Polinom>{text1, Polinom(text2)});
 								else
-									MessageBox(hWnd, "Key is wrong", "Error", MB_ICONINFORMATION);
+									MessageBox(messageBox, "Key is wrong", "Error", MB_ICONINFORMATION);
 
 								cMaxY += 20;
 								SetScrollRange(hWnd, SB_VERT, 0, cMaxY, TRUE);
@@ -335,7 +336,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 						{
 						case WM_CREATE:
 						{
-							MessageBox(hWnd, "Available operations:\n\"+\" - addition\n\"-\" - subtraction\n\"*\" - multiplication\n\"Diff(x,y)\" - differentiation x by y\n\"Integr(x,y)\" - integration x by y\n", "Info", MB_ICONINFORMATION);
+							
+							MessageBox(messageBox,"Available operations:\n\"+\" - addition\n\"-\" - subtraction\n\"*\" - multiplication\n\"Diff(x,y)\" - differentiation x by y\n\"Integr(x,y)\" - integration x by y\n", "Info", MB_ICONINFORMATION);
 							GetClientRect(hWnd, &rc);
 							textBox1 = CreateWindow("EDIT", "", WS_CHILD | WS_VISIBLE | WS_BORDER, rc.left + 85, (rc.bottom - 30) / 2 - 10,
 								rc.right - 95, 20, hWnd, reinterpret_cast<HMENU>(1212), nullptr, nullptr);
@@ -380,7 +382,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 								}
 								catch (std::string ex)
 								{
-									MessageBox(hWnd, ex.c_str(), "Error", MB_ICONINFORMATION);
+									MessageBox(messageBox, ex.c_str(), "Error", MB_ICONINFORMATION);
 								}
 								ShowWindow(hWnd, 0);
 
@@ -514,7 +516,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 								}
 								catch (std::string ex)
 								{
-									MessageBox(hWnd, ex.c_str(), "Error", MB_ICONINFORMATION);
+									MessageBox(messageBox, ex.c_str(), "Error", MB_ICONINFORMATION);
 								}
 
 								ShowWindow(hWnd, 0);
@@ -572,7 +574,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 												if (checkOfKey(text1))
 													manager.addAll(TRecord<std::string, Polinom>{text1, new_polinom});
 												else
-													MessageBox(hWnd, "Key is wrong", "Error", MB_ICONINFORMATION);
+													MessageBox(messageBox, "Key is wrong", "Error", MB_ICONINFORMATION);
 
 												cMaxY += 20;
 												SetScrollRange(hWnd, SB_VERT, 0, cMaxY, TRUE);

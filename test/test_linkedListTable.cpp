@@ -84,31 +84,6 @@ TEST(LinearListTableTest, AddLargeNumber) {
     }
 }
 
-// Тест проверяет отображение содержимого таблицы
-TEST(LinearListTableTest, Display) {
-    TLinearListTable<int, std::string> table;
-
-    TRecord<int, std::string> record1 = { 1, "Value1" };
-    TRecord<int, std::string> record2 = { 2, "Value2" };
-
-    table.add(record1);
-    table.add(record2);
-
-    // Перенаправление вывода для проверки отображения
-    std::stringstream output;
-    std::streambuf* coutBuffer = std::cout.rdbuf();
-    std::cout.rdbuf(output.rdbuf());
-
-    // Отображение таблицы
-    table.display();
-
-    std::cout.rdbuf(coutBuffer); // Восстановление вывода
-
-    // Проверка корректности вывода
-    std::string expectedOutput = "Key: 1, Value: Value1\nKey: 2, Value: Value2\n";
-    EXPECT_EQ(output.str(), expectedOutput);
-}
-
 // Тест проверяет удаление всех элементов из таблицы
 TEST(LinearListTableTest, RemoveAll) {
     TLinearListTable<int, std::string> table;

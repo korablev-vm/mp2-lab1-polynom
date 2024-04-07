@@ -187,7 +187,7 @@ bool List<T>::operator==(const List<T>& list)
 template<class T>
 bool List<T>::operator!=(const List<T>& list)
 {
-	return (!(this == list));
+	return (!(*this == list));
 }
 
 template<class T>

@@ -5,7 +5,7 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #include <Windows.h>
 #include <memory>
 #include <string>
-#include "AVLTree.h"
+#include "RBTree.h"
 #include "ChainingHashTable.h"
 #include "LinearArrayTable.h"
 #include "LinkedListTable.h"
@@ -85,7 +85,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 	auto rehashingHashTable = std::make_shared<RehashingHashTable<std::string, Polinom>>();
 	auto chainingHashTable = std::make_shared<ChainingHashTable<std::string, Polinom>>();
 	auto linkedListTable = std::make_shared<TLinearListTable<std::string, Polinom>>();
-	//auto avlTreeTable = std::make_shared<AVLTree<std::string, Polinom>>();
+	auto rbTreeTable = std::make_shared<RedBlackTree<std::string, Polinom>>();
 
 
 
@@ -95,7 +95,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 	manager.addTable(rehashingHashTable);
 	manager.addTable(chainingHashTable);
 	manager.addTable(linkedListTable);
-	//manager.addTable(avlTreeTable);
+	manager.addTable(rbTreeTable);
 
 
 	wc.cbClsExtra = 0;
@@ -634,7 +634,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 								rc.bottom - 45, 140, 20, hWnd, reinterpret_cast<HMENU>(1304), nullptr, nullptr);
 							hButton[0] = CreateWindow("BUTTON", "Linked List Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right / 2 - 70,
 								rc.top + 25, 140, 20, hWnd, reinterpret_cast<HMENU>(1305), nullptr, nullptr);
-							hButton[0] = CreateWindow("BUTTON", "AVL Tree Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right / 2 - 70,
+							hButton[0] = CreateWindow("BUTTON", "RedBlack Tree Table", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, rc.right / 2 - 70,
 								rc.bottom - 45, 140, 20, hWnd, reinterpret_cast<HMENU>(1306), nullptr, nullptr);
 						}
 						return 0;

@@ -5,6 +5,7 @@
 #include <memory>
 #include <stdexcept>
 #include "TableInterface.h"
+#include <Windows.h>
 
 template<typename TKey, typename TValue>
 class TableManager {

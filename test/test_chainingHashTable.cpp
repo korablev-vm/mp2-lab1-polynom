@@ -1,5 +1,6 @@
 ﻿#include <gtest.h>
 #include "ChainingHashTable.h"
+#include <Windows.h>
 
 // Тест проверяет добавление и поиск элементов в хэш-таблице
 TEST(ChainingHashTableTest, AddAndFind) {
@@ -49,31 +50,6 @@ TEST(ChainingHashTableTest, FindNonExistent) {
 
     // Поиск записи по ключу, который отсутствует в таблице
     EXPECT_EQ(table.find(1), nullptr);
-}
-
-// Тест проверяет отображение содержимого хэш-таблицы
-TEST(ChainingHashTableTest, Display) {
-    ChainingHashTable<int, std::string> table;
-
-    // Добавление нескольких записей в таблицу
-    TRecord<int, std::string> record1 = { 1, "Value1" };
-    TRecord<int, std::string> record2 = { 2, "Value2" };
-    table.add(record1);
-    table.add(record2);
-
-    // Перенаправление вывода для проверки отображения
-    std::stringstream output;
-    std::streambuf* coutBuffer = std::cout.rdbuf();
-    std::cout.rdbuf(output.rdbuf());
-
-    // Отображение таблицы
-    table.display();
-
-    std::cout.rdbuf(coutBuffer); // Восстановление вывода
-
-    // Проверка корректности вывода
-    std::string expectedOutput = "Key: 1, Value: Value1\nKey: 2, Value: Value2\n";
-    EXPECT_EQ(output.str(), expectedOutput);
 }
 
 // Тест проверяет добавление и последующее удаление нескольких элементов

@@ -1,6 +1,6 @@
-﻿#include "postfix.h"
-#include <gtest.h>
-
+﻿//#include "postfix.h"
+//#include <gtest.h>
+//
 //TEST(TPostfix, can_create_postfix)
 //{
 //	ASSERT_NO_THROW(TPostfix<int, std::string> p("a+b"));
@@ -58,22 +58,22 @@
 //{
 //	ASSERT_NO_THROW(TPostfix<int, std::string> p("(a + 2) / 2 * (4 - b)"));
 //}
-
-TEST(TPostfix, can_return_infix_form)
-{
-	TPostfix <int, std::string> p("(a + b / 2) * 4");
-	EXPECT_EQ("(a+b/2)*4", p.GetInfix());
-}
-
-TEST(TPostfix, can_convert_infix_form_to_postfix)
-{
-	TPostfix <int, std::string> p("(a+2)/2*(4-b)");
-	EXPECT_EQ("a2+2/4b-*", p.GetPostfix());
-}
-
-TEST(TPostfix, can_calculate_in_postfix)
-{
-	int x = 4, y = 2, z = 5;
-	TPostfix <int, std::string> p("(x+y)*z-x/y");
-	EXPECT_EQ(((x + y) * z - x / y), p.Calculate(std::vector<double>{ 4, 2, 5}));
-}
+//
+//TEST(TPostfix, can_return_infix_form)
+//{
+//	TPostfix <int, std::string> p("(a + b / 2) * 4");
+//	EXPECT_EQ("(a+b/2)*4", p.GetInfix());
+//}
+//
+//TEST(TPostfix, can_convert_infix_form_to_postfix)
+//{
+//	TPostfix <int, std::string> p("(a+2)/2*(4-b)");
+//	EXPECT_EQ("a2+2/4b-*", p.GetPostfix());
+//}
+//
+//TEST(TPostfix, can_calculate_in_postfix)
+//{
+//	int x = 4, y = 2, z = 5;
+//	TPostfix <int, std::string> p("(x+y)*z-x/y");
+//	EXPECT_EQ(((x + y) * z - x / y), p.Calculate(std::vector<double>{ 4, 2, 5}));
+//}

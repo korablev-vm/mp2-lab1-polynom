@@ -11,7 +11,7 @@
 #include "Polinom.h"
 #include "TableManager.h"
 
-template <typename T, typename TKey/*, typename TValue*/>
+template <typename T, typename TKey>
 class TPostfix
 {
 	std::vector<std::string> infix;
@@ -20,10 +20,9 @@ class TPostfix
 	std::string postfix_str;
 	std::map<std::string, double> operands;
 	std::map<std::string, double> constants;
-	TableManager<TKey, Polinom/*TValue*/>* manager;
+	TableManager<TKey, Polinom> manager;
 public:
-	TPostfix(std::string str, TableManager<TKey, /*TValue*/Polinom>* _manager = nullptr);
-	~TPostfix();
+	TPostfix(std::string str, const TableManager<TKey, Polinom>& _manager);
 	std::string GetInfix() { return infix_str; }
 	std::string GetPostfix() { return postfix_str; }
 private:
@@ -33,11 +32,12 @@ private:
 
 public:
 	std::vector<std::string> GetAllVariables();
-	double Calculate(std::vector<double> values_of_operands = {}); //Зависит от доступа к полиномам по именам
+	Polinom CreateNewPolinom();
+	double Calculate(std::vector<double> values_of_operands = {});
 };
 
-template <typename T, typename TKey/*, typename TValue*/>
-TPostfix<T, TKey/*, TValue*/>::TPostfix(std::string str, TableManager<TKey, /*TValue*/Polinom>* _manager) //: manager(_manager)
+template <typename T, typename TKey>
+TPostfix<T, TKey>::TPostfix(std::string str, const TableManager<TKey, Polinom>& _manager)
 {
 	manager = _manager;
 	for (size_t i = 0; i < str.size(); i++)
@@ -49,21 +49,16 @@ TPostfix<T, TKey/*, TValue*/>::TPostfix(std::string str, TableManager<TKey, /*TV
 	ToPostfix();
 }
 
-template <typename T, typename TKey/*, typename TValue*/>
-TPostfix<T, TKey/*, TValue*/>::~TPostfix()
-{
-	manager = nullptr;
-}
-
-template <typename T, typename TKey/*, typename TValue*/>
-void TPostfix<T, TKey/*, TValue*/>::ToInfix()
+template <typename T, typename TKey>
+void TPostfix<T, TKey>::ToInfix()
 {
 	std::string element, operand;
 	Operations<T, T> op;
 	for (size_t i = 0; i < infix_str.size(); i++)
 	{
 		element = infix_str[i];
-		if (!op.IfIsOperation(element))
+		if (element == " ");
+		else if (!op.IfIsOperation(element))
 			operand += element;
 		else
 		{
@@ -83,8 +78,8 @@ void TPostfix<T, TKey/*, TValue*/>::ToInfix()
 		infix.push_back(operand);
 }
 
-template <typename T, typename TKey/*, typename TValue*/>
-void TPostfix<T, TKey/*, TValue*/>::CheckOfExpression()
+template <typename T, typename TKey>
+void TPostfix<T, TKey>::CheckOfExpression()
 {
 	int count_of_left = 0, count_of_right = 0;
 	Operations<T, T> op;
@@ -94,7 +89,7 @@ void TPostfix<T, TKey/*, TValue*/>::CheckOfExpression()
 			count_of_left++;
 		if (infix[0] == ")")
 			throw "Expression is wrong, check operations";
-		if ((op.GetArity(infix[0]) > 1) && (infix[0] != "-"))
+		if ((op.GetArity(infix[0]) > 1) && (infix[0] != "-") && (infix[0] == "Diff") && (infix[0] == "Integr"))
 			throw "Expression is wrong, check operations";
 	}
 	else
@@ -115,16 +110,21 @@ void TPostfix<T, TKey/*, TValue*/>::CheckOfExpression()
 			if (infix[i] == ")")
 				count_of_right++;
 			if ((op.IfIsOperation(infix[i - 1]))
-				&& ((op.GetArity(infix[i]) > 1) && (infix[i] != "-") && (infix[i - 1] != ")")
-					|| (infix[i] == "-") && (op.GetArity(infix[i - 1]) > 0)
-					|| (infix[i - 1] == ")") && (op.GetArity(infix[i]) == 1)))
+				&& (op.GetArity(infix[i]) > 1) && (infix[i] != "-") && (infix[i] != "Diff") && (infix[i] != "Integr") 
+				&& (infix[i - 1] != ")"))
 				throw "Expression is wrong, check operations";
-			else if (!op.IfIsOperation(infix[i - 1]) && (op.GetArity(infix[i]) < 2) && (infix[i] != ")"))
+				if ((infix[i] == "-") && (op.GetArity(infix[i - 1]) > 0))
+					throw "Expression is wrong, check operations";
+				if ((infix[i - 1] == ")") && ((op.GetArity(infix[i]) == 1) || (infix[i] == "Diff") || (infix[i] == "Integr")))
 				throw "Expression is wrong, check operations";
+				else if (!op.IfIsOperation(infix[i - 1]) && ((op.GetArity(infix[i]) < 2) && (infix[i] != ")")
+					|| (infix[i] == "Diff") || (infix[i] == "Integr")))
+					throw "Expression is wrong, check operations";
 		}
 		else
 		{
-			if ((!op.IfIsOperation(infix[i - 1])) || (infix[i - 1] == ")"))
+			if ((!op.IfIsOperation(infix[i - 1])) && ((i > 1) && ((infix[i - 2] != "Diff") || (infix[i - 2] != "Integr"))) 
+				|| (infix[i - 1] == ")"))
 				throw "Expression is wrong, check operands";
 			if (!((infix[i].find_first_not_of("0123456789,") == std::string::npos)
 				|| ((infix[i].find_first_of("0123456789") > infix[i].find_last_not_of("0123456789"))
@@ -136,8 +136,8 @@ void TPostfix<T, TKey/*, TValue*/>::CheckOfExpression()
 		throw "Expression is wrong, check brackets";
 }
 
-template <typename T, typename TKey/*, typename TValue*/>
-void TPostfix<T, TKey/*, TValue*/>::ToPostfix()
+template <typename T, typename TKey>
+void TPostfix<T, TKey>::ToPostfix()
 {
 	TStack<std::string> st(infix.size());
 	Operations<T, T> op;
@@ -145,7 +145,7 @@ void TPostfix<T, TKey/*, TValue*/>::ToPostfix()
 	{
 		if (op.IfIsOperation(infix[i]))
 		{
-			if (infix[i] == "(")
+			if ((infix[i] == "("))
 				st.push(infix[i]);
 			else if (infix[i] == ")")
 			{
@@ -157,7 +157,8 @@ void TPostfix<T, TKey/*, TValue*/>::ToPostfix()
 			{
 				while (!((st.empty()) || (op.GetPriority(infix[i]) > op.GetPriority(st.getTop()))))
 					postfix.push_back(st.pop());
-				st.push(infix[i]);
+				if (infix[i] != ",")
+					st.push(infix[i]);
 			}
 		}
 		else
@@ -177,64 +178,64 @@ void TPostfix<T, TKey/*, TValue*/>::ToPostfix()
 	}
 }
 
-template <typename T, typename TKey/*, typename TValue*/>
-double TPostfix<T, TKey/*, TValue*/>::Calculate(std::vector<double> values)
+template <typename T, typename TKey>
+double TPostfix<T, TKey>::Calculate(std::vector<double> values)
 {
-	Operations<double, double> op;
-	TStack<double> st;
-	TKey key;
+	Polinom res_polinom = CreateNewPolinom();
 	std::map<std::string, double> values_of_variables;
-	if (manager != nullptr)
-	{
-		std::vector<std::string> variables = GetAllVariables();
-		for (int i = 0; i < variables.size(); i++)
-			values_of_variables.emplace(variables[i], values[i]);
-		/*TValue**/Polinom* tmp;
-		for (auto it = operands.begin(); it != operands.end(); it++)
-		{
-			key = it->first;
+	std::vector<std::string> variables = GetAllVariables();
+	for (int i = 0; i < variables.size(); i++)
+		values_of_variables.emplace(variables[i], values[i]);
+	return res_polinom.Calculation(values_of_variables);
+}
 
-			tmp = manager->find(key);
-			if (tmp != nullptr)
-				it->second = tmp->Calculation(values_of_variables);
-			else
-				it->second = values_of_variables[key];
-		}
-	}
-	else
-	{
-		int i = 0;
-		for (auto it = operands.begin(); it != operands.end(); it++, i++)
-		{
-			key = it->first;
-			it->second = values[i];
-		}
-	}
-
+template <typename T, typename TKey>
+std::vector<std::string> TPostfix<T, TKey>::GetAllVariables()
+{
+	Polinom tmp;
+	return tmp.GetAllVariables();
+}
+template<typename T, typename TKey>
+Polinom TPostfix<T, TKey>::CreateNewPolinom()
+{
+	Operations<Polinom, Polinom> op;
+	TStack<Polinom> st;
+	std::vector<std::string> variables = GetAllVariables();
 	for (const std::string& element : postfix)
 	{
 		if (!op.IfIsOperation(element))
 		{
-			if (operands.count(element) > 0)
-				st.push(operands.at(element));
+			if ((operands.count(element) > 0) && (std::find(begin(variables), end(variables), element) == end(variables)))
+			{
+				if (manager.find(element) == nullptr)
+					throw std::out_of_range("Не надено полинома с именем " + element);
+				Polinom pol(manager.find(element));
+				st.push(pol);
+			}
 			else
-				st.push(constants.at(element));
+				st.push(Polinom(element));
 		}
 		else
 		{
-				double first = st.pop();
-				st.push(op.Calculation(element, first, st.pop()));
+			if (element.size() > 2)
+			{
+				std::string variable_in_polinom = st.pop().ToString();
+				std::string variable = "";
+				for (int i = variable_in_polinom.find_first_not_of("0123456789,"); variable_in_polinom[i] != '^'; i++)
+					variable += variable_in_polinom[i];
+				Polinom val1 = st.pop();
+				st.push(op.CalculationAr1(element, val1, variable));
+			}
+			else
+			{
+				Polinom val1 = st.pop();
+				Polinom val2 = st.pop();
+				Polinom res = op.CalculationAr2(element, val1, val2);
+				st.push(res);
+			}
 		}
 	}
-	double res = st.pop();
-	return res;
-}
-
-template <typename T, typename TKey/*, typename TValue*/>
-std::vector<std::string> TPostfix<T, TKey/*, TValue*/>::GetAllVariables()
-{
-	Polinom* tmp;
-	return tmp->GetAllVariables();
+	return st.pop();
 }
 
 #endif // POSTFIX_H

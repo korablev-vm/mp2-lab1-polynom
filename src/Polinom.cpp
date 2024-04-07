@@ -1,8 +1,9 @@
 ﻿#include "Polinom.h"
 
 std::map<std::string, int> all_variables;
+int next_degree = 0;
 
-Polinom::Polinom(int p, std::string exp)
+Polinom::Polinom(std::string exp, int p)
 {
 	if ((p > 50) || (p < 0))
 		throw "Incorrect max degree";
@@ -12,7 +13,6 @@ Polinom::Polinom(int p, std::string exp)
 	int key;
 	std::map<std::string, int> var;
 	max_degree = p * 2;
-	next_degree = 0;
 	for (int i = 0; i < exp.size(); )
 	{
 		coeff = 1;
@@ -62,14 +62,18 @@ Polinom::Polinom(const Polinom& new_exp)
 {
 	this->expression = new_exp.expression;
 	this->max_degree = new_exp.max_degree;
-	this->next_degree = new_exp.next_degree;
+}
+
+Polinom::Polinom(const Polinom* new_exp)
+{
+	this->expression = new_exp->expression;
+	this->max_degree = new_exp->max_degree;
 }
 
 Polinom& Polinom::operator=(const Polinom& new_exp)
 {
 	this->expression = new_exp.expression;
 	this->max_degree = new_exp.max_degree;
-	this->next_degree = new_exp.next_degree;
 	return *this;
 }
 
@@ -83,7 +87,6 @@ double Polinom::Calculation(std::map<std::string, double> values)
 
 void Polinom::operator+=(Polinom& new_exp)
 {
-	this->next_degree = std::max(this->next_degree, new_exp.next_degree);
 	int i = 0, j = 0;
 	if ((i < this->expression.size()) && (this->expression[0].is_empty()))
 		this->expression.erase(i);
@@ -114,13 +117,12 @@ void Polinom::operator+=(Polinom& new_exp)
 
 void Polinom::operator+=(const int& new_exp)
 {
-	Polinom m(2, std::to_string(new_exp));
+	Polinom m(std::to_string(new_exp), 2);
 	*this += m;
 }
 
 void Polinom::operator*=(Polinom& new_exp)
 {
-	this->next_degree = std::max(this->next_degree, new_exp.next_degree);
 	List<Monom> new_list;
 	for (int i = 0; i < this->expression.size(); i++)
 		for (int j = 0; j < new_exp.expression.size(); j++)
@@ -131,7 +133,7 @@ void Polinom::operator*=(Polinom& new_exp)
 
 void Polinom::operator*=(const int& new_exp)
 {
-	Polinom m(2, std::to_string(new_exp));
+	Polinom m(std::to_string(new_exp), 2);
 	*this *= m;
 }
 
@@ -203,9 +205,24 @@ Polinom operator+(Polinom& first, Polinom& second)
 	return res;
 }
 
+Polinom operator-(Polinom& first, Polinom& second)
+{
+	Polinom res(second);
+	res *= -1;
+	res += second;
+	return res;
+}
+
 Polinom operator*(Polinom& first, Polinom& second)
 {
 	Polinom res(first);
 	res *= second;
 	return res;
+}
+
+std::ostream& operator<<(std::ostream& ostr, const Polinom& exp)
+{
+	Polinom copy(exp);
+	ostr << copy.ToString();
+	return ostr;
 }

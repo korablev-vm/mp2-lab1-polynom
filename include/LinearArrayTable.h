@@ -35,9 +35,14 @@ public:
         return nullptr;
     }
 
-    void display() const override {
-        for (const auto& item : data) {
-            std::cout << "Key: " << item.key << ", Value: " << item.value << std::endl;
+    void display(HDC hdc, int PosY) const override {
+        int y = -PosY;
+        for (const auto& record : data) {
+            std::ostringstream oss;
+            oss << "Key: " << record.key << ",\tValue: " << record.value;
+            std::string text = oss.str();
+            TabbedTextOut(hdc, 5, y, text.c_str(), __max(text.size(), 20), 1, NULL, 0);
+            y += 20;
         }
     }
 };

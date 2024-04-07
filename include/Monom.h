@@ -17,6 +17,7 @@ public:
 	bool operator<(const Monom& new_monom);
 	bool operator>(const Monom& new_monom);
 	bool operator==(const Monom& new_monom);
+	bool operator!=(const Monom& new_monom);
 	void operator+=(const Monom& new_monom);
 	void operator*=(int num);
 	void operator*=(const Monom& new_monom);

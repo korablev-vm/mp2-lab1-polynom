@@ -60,11 +60,13 @@ public:
         return tables[activeTableIndex]->find(key);
     }
 
-    void display() const {
+    void display(HDC hdc, int PosY) const {
         if (tables.empty()) {
             throw std::runtime_error("Нет добавленных таблиц для операции отображения");
         }
-        tables[activeTableIndex]->display();
+        if (activeTableIndex >= 0) {
+            tables[activeTableIndex]->display(hdc, PosY);
+        }
     }
 };
 

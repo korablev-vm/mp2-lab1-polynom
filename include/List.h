@@ -179,7 +179,7 @@ bool List<T>::operator==(const List<T>& list)
 	Node* p1 = this->pFirst;
 	Node* p2 = list.pFirst;
 	for (; p1 != nullptr; p1 = p1->pNext, p2 = p2->pNext)
-		if (!(p1->elem == p2->elem))
+		if (p1->elem != p2->elem)
 			return false;
 	return true;
 }
@@ -187,7 +187,7 @@ bool List<T>::operator==(const List<T>& list)
 template<class T>
 bool List<T>::operator!=(const List<T>& list)
 {
-	return (!(*this == list));
+	return (!(this == list));
 }
 
 template<class T>

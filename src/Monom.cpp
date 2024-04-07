@@ -30,6 +30,11 @@ bool Monom::operator==(const Monom& new_monom)
 	return (this->key == new_monom.key);
 }
 
+bool Monom::operator!=(const Monom& new_monom)
+{
+	return ((this->key != new_monom.key) || (this->coefficient != new_monom.coefficient));
+}
+
 void Monom::operator+=(const Monom& new_monom)
 {
 	if (this->variables != new_monom.variables)

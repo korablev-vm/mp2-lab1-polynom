@@ -250,9 +250,9 @@ private:
             _display(node->left, hdc, y, xOffset + 15); // Увеличиваем смещение для левых дочерних узлов
 
             std::ostringstream oss;
-            oss << "Key: " << node->data.key << ", Value: " << node->data.value << ", Color: " << (node->color == RED ? "Red" : "Black");
+            oss << "Key: " << node->data.key << ",\tValue: " << node->data.value << ",\tColor: " << (node->color == RED ? "Red" : "Black");
             std::string itemText = oss.str();
-            TextOut(hdc, xOffset, y, itemText.c_str(), itemText.size());
+            TabbedTextOut(hdc, 5, y, itemText.c_str(), __max(itemText.size(), 33), 2, NULL, 0);
             y += 20; // Смещаем y на 20 для следующего узла
 
             _display(node->right, hdc, y, xOffset); // Смещение для правых дочерних узлов
@@ -326,7 +326,7 @@ public:
     }
 
     void display(HDC hdc, int PosY) const override {
-        int y = PosY;
+        int y = -PosY;
         _display(root, hdc, y);
     }
 };

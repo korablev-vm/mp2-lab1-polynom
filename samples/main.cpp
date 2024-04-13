@@ -401,6 +401,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR szCmdLine, int nCmdSho
 										{
 										case WM_CREATE:
 										{
+											GetWindowRect(hWnd, &rc);
+											SetWindowPos(hWnd, nullptr, rc.left, rc.top, rc.right - rc.left, variables.size() * 30 + 100, SWP_NOZORDER | SWP_NOOWNERZORDER);
 											GetClientRect(hWnd, &rc);
 											HMENU hMenu = CreateMenu();
 											AppendMenu(hMenu, MF_STRING, 4004, "Ok");
